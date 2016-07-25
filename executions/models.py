@@ -2,6 +2,7 @@ from django.db import models
 
 from testcases.models import TestCase
 from testscripts.models import TestScript
+from django.template.defaultfilters import default
 
 # Create your models here.
 
@@ -29,7 +30,10 @@ class ExecutionTS(models.Model):
     exec_ts_id       = models.AutoField(primary_key=True)
     script_id        = models.ForeignKey(TestScript)
     exec_id          = models.ForeignKey(Execution)
-    status           = models.CharField(max_length=6, choices=STATUS_CHOICES, default=NORUN);
+    passCount        = models.IntegerField(default=0)
+    failCount        = models.IntegerField(default=0)
+    noRunCount       = models.IntegerField(default=0)
+    totalCount       = models.IntegerField(default=0)
     executed_time    = models.DateTimeField(auto_now_add=True, auto_now=False)
     modified_time    = models.DateTimeField(auto_now_add=False, auto_now=True)
     def __str__(self):
