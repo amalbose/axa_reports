@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<button id="createTPBtn" class="btn btn-default pull-right">Create TestPlan</button>
+	<h1>{{ title }}</h1><br/>
+	<div class="table-responsive">
+	<table class="table table-hover tablesorter" id="testPlanTable">
+		<thead> 
+	    <tr class="hoverable">
+	    	<th>Edit</th>
+	        <th>TestPlan ID</th>
+	        <th>TestPlan Name</th>
+	        <th>Owner</th>
+	        <th>Active</th>
+	        <th>Created Time</th>
+	    </tr>
+	    </thead> 
+	    {% for item in latest_testplan_list %}
+	    <tr {% if item.active|stringformat:"s" != "True" %} class='warning' {% endif %}> 
+   	        <td><a href="{% url 'testplans:detail' item.plan_id  %}">Edit</a></td>	      
+	        <td>{{ item.testplan_id }}</td>
+	        <td>{{ item.testplan_name }}</td>
+	        <td>{{ item.owner }}</td>
+	        <td>{{ item.active }}</td>
+	        <td>{{ item.created_time }}</td>
+	    </tr>
+	    {% endfor %}
+	</table>
+	</div>
+{% endblock content %}
+
+
+{% block footer-content %}
+    <script src="{% static "js/jquery.tablesorter.min.js" %}"></script>
+    <script type="text/javascript" >
+    	$(document).ready(function() 
+		    { 
+		        $("#testPlanTable").tablesorter(); 
+		    } 
+		);
+		
+		$( "#createTPBtn" ).click(function() {
+		  window.location.href = "{% url 'testplans:index' %}";
+		});
+    </script>
+{% endblock footer-content %}
+
+
+
+
+	

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<h1>{{ title }}</h1><br/>
+	<div class="table-responsive">
+	<table class="table table-hover tablesorter" id="testScriptTable">
+		<thead> 
+	    <tr class="hoverable">
+	    	<th>Edit</th>
+	        <th>TestScript ID</th>
+	        <th>TestScript Name</th>
+	        <th>TestPlan Name</th>
+	        <th>Owner</th>
+	        <th>Active</th>
+	        <th>Created Time</th>
+	    </tr>
+	    </thead> 
+	    {% for item in latest_testscript_list %}
+	    <tr {% if item.active|stringformat:"s" != "True" %} class='warning' {% endif %}> 
+   	        <td><a href="{% url 'testscripts:detail' item.script_id  %}">Edit</a></td>	      
+	        <td>{{ item.script_id }}</td>
+	        <td>{{ item.script_name }}</td>
+	        <td>{{ item.plan_id }}</td>
+	        <td>{{ item.owner }}</td>
+	        <td>{{ item.active }}</td>
+	        <td>{{ item.created_time }}</td>
+	    </tr>
+	    {% endfor %}
+	</table>
+	</div>
+{% endblock content %}
+
+
+{% block footer-content %}
+    <script src="{% static "js/jquery.tablesorter.min.js" %}"></script>
+    <script type="text/javascript" >
+    	$(document).ready(function() 
+		    { 
+		        $("#testScriptTable").tablesorter(); 
+		    } 
+		);
+    </script>
+{% endblock footer-content %}
+
+
+
+
+	
