@@ -11,7 +11,6 @@
 	    	<th>Edit</th>
 	        <th>TestScript ID</th>
 	        <th>TestScript Name</th>
-	        <th>Script Path</th>
 	        <th>TestPlan Name</th>
 	        <th>Owner</th>
 	        <th>Active</th>
@@ -23,7 +22,6 @@
    	        <td><a href="{% url 'testscripts:detail' item.script_id  %}">Edit</a></td>	      
 	        <td>{{ item.script_id }}</td>
 	        <td>{{ item.script_name }}</td>
-	        <td>{{ item.script_path }}</td>
 	        <td>{{ item.plan_id }}</td>
 	        <td>{{ item.owner }}</td>
 	        <td>{{ item.active }}</td>
